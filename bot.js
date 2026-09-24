@@ -36,212 +36,212 @@ console.log(`📋 Admin ID: ${ADMIN_ID}`);
 // ═══════════════════════════════════════════════════════════════
 const ALL_QUESTIONS = [
   {
-    question: "Infratuzilma iqtisodiyotining asosiy ob'ekti nima hisoblanadi?",
+    question: "Infratuzilma iqtisodiyoti fanining predmetini eng aniq ifodalovchi javobni aniqlang.",
     options: [
-      "Iqtisodiy faoliyatni ta'minlovchi yordamchi tarmoqlar va tizimlar",
-      "Faqat sanoat korxonalari",
-      "Davlat boshqaruv organlari",
-      "Xalqaro savdo bitimlari",
+      "Faqat ishlab chiqarish korxonalarining moliyaviy natijalarini o‘rganish",
+      "Insonlar tomonidan barpo etiladigan va o‘zaro hamkorlikni tarkiblovchi siyosiy, iqtisodiy hamda ijtimoiy me’yor va qoidalarni o‘rganish",
+      "Faqat davlat budjeti daromadlarini o‘rganish",
+      "Ishlab chiqarish texnologiyalarini texnik jihatdan baholash"
     ],
-    correct: 0,
+    correct: 1
   },
   {
-    question: "Ishlab chiqarish infratuzilmasi va ijtimoiy infratuzilmaning farqi nimada?",
-    options: [
-      "Ishlab chiqarish infratuzilmasi moddiy ishlab chiqarishga, ijtimoiy infratuzilma aholining turmush sharoitiga xizmat qiladi",
-      "Farqi yo'q, ikkalasi bir xil",
-      "Ijtimoiy infratuzilma faqat transport sohasini o'z ichiga oladi",
-      "Ishlab chiqarish infratuzilmasi faqat qishloq xo'jaligiga tegishli",
+    question: "Korxonada elektr energiyasi va internetning 24 soat uzilishi eng avvalo nimani ko‘rsatadi?",
+    options:
+      "Infratuzilmaning iqtisodiy tizim faoliyatining zarur sharti ekanini",
+    "Infratuzilma faqat davlat sektoriga xizmat qilishini",
+    "Ishlab chiqarish infratuzilmadan mustaqil ekanini",
+    "Infratuzilmaning faqat ijtimoiy vazifa bajarishini"
     ],
-    correct: 0,
+  correct: 0
   },
-  {
-    question: "Davlat-xususiy sheriklik (PPP) modelining asosiy afzalligi nimada?",
+{
+  question: "Qashqadaryo va Samarqand transport infratuzilmasidagi farqlarni aniqlash uchun qaysi usul eng mos?",
     options: [
-      "Davlat xarajatlarini kamaytirgan holda xususiy sektor samaradorligidan foydalanish imkonini beradi",
-      "Davlat barcha xarajatlarni o'z zimmasiga oladi",
-      "Xususiy sektor boshqaruvdan to'liq chetlashtiriladi",
-      "Faqat xorijiy investorlar uchun qulay",
+      "Prognozlash",
+      "Ekonometrik usul",
+      "Taqqoslash",
+      "Ilmiy abstraksiya"
     ],
-    correct: 0,
-  },
-  {
-    question: "Infratuzilma multiplikator effekti qanday namoyon bo'ladi?",
+      correct: 2
+},
+{
+  question: "2021–2025-yillarda infratuzilmaga yo‘naltirilgan investitsiyalarning yillar bo‘yicha o‘zgarishini o‘rganishda qaysi usul mos?",
     options: [
-      "Infratuzilmaga 1 so'm investitsiya YaIMning bir necha barobar o'sishiga olib keladi",
-      "Faqat infratuzilma sohasida ish o'rinlari paydo bo'ladi",
-      "Investitsiya qaytarilmaydi",
-      "Faqat soliq tushumlari oshadi",
+      "Statistik tahlil",
+      "Deduksiya",
+      "Taqqoslash",
+      "Ilmiy abstraksiya"
     ],
-    correct: 0,
-  },
-  {
-    question: "Transport infratuzilmasining iqtisodiy o'sishga ta'siri qanday?",
+      correct: 0
+},
+{
+  question: "Investitsiyalar hajmi bilan iqtisodiy o‘sish o‘rtasidagi bog‘liqlikning miqdoriy darajasini aniqlash uchun qaysi usul tanlanadi?",
     options: [
-      "Logistika xarajatlarini kamaytiradi, hududlararo savdoni kengaytiradi va ish o'rinlari yaratadi",
-      "Faqat yo'lovchi tashish uchun xizmat qiladi",
-      "Iqtisodiy o'sishga ta'sir qilmaydi",
-      "Faqat shahar ichidagi harakatlanishni yengillashtiiradi",
+      "Tarixiy usul",
+      "Ekonometrik usul",
+      "Mantiqiy usul",
+      "Taqqoslash"
     ],
-    correct: 0,
-  },
-  {
-    question: "O'zbekistonda energetika infratuzilmasining asosiy muammolaridan biri qaysi?",
+      correct: 1
+},
+{
+  question: "2030-yilgacha infratuzilmaga bo‘lgan ehtiyojni aniqlash vazifasiga qaysi usul bevosita mos?",
     options: [
-      "Energiya tarmoqlarining eskirishi va uzatish jarayonidagi yo'qotishlar yuqoriligi",
-      "Energiyaga talab yo'qligi",
-      "Haddan tashqari ko'p elektr stansiyalari mavjudligi",
-      "Barcha hududlar barqaror energiya bilan ta'minlanganligi",
+      "Taqqoslash",
+      "Statistik guruhlash",
+      "Prognozlash",
+      "Ilmiy abstraksiya"
     ],
-    correct: 0,
-  },
-  {
-    question: "Konsessiya shartnomasi nima?",
+      correct: 2
+},
+{
+  question: "Qaysi biri slaydda keltirilgan umumiy ilmiy tadqiqot usullari tarkibiga kirmaydi?",
     options: [
-      "Davlat mulkini xususiy tashkilotga muayyan muddat uchun boshqarishga berish shartnomasi",
-      "Davlat mulkini sotish shartnomasi",
-      "Xorijiy kompaniyalarni mamlakatdan chiqarish hujjati",
-      "Soliqlardan ozod qilish hujjati",
+      "Induksiya va deduksiya",
+      "Tahlil va sintez",
+      "Tizimli yondashuv",
+      "Ekonometrik modellashtirish"
     ],
-    correct: 0,
-  },
-  {
-    question: "Raqamli infratuzilmaning zamonaviy iqtisodiyotdagi roli qanday?",
+      correct: 3
+},
+{
+  question: "Infratuzilma tizimini elementlarga ajratib o‘rganib, keyin ularni yagona tizim sifatida birlashtirishda qaysi usullar qo‘llanadi?",
     options: [
-      "Elektron tijorat, masofaviy ta'lim, raqamli xizmatlar va innovatsion iqtisodiyotni rivojlantiradi",
-      "Faqat ijtimoiy tarmoqlar uchun kerak",
-      "Iqtisodiyotga ta'sir qilmaydi",
-      "Faqat davlat xavfsizligi uchun zarur",
+      "Induksiya va deduksiya",
+      "Tahlil va sintez",
+      "Tarixiy va mantiqiy",
+      "Taqqoslash va prognozlash"
     ],
-    correct: 0,
-  },
-  {
-    question: "BOT (Build-Operate-Transfer) modeli qanday ishlaydi?",
+      correct: 1
+},
+{
+  question: "Slaydda infratuzilma tushunchasining iqtisodiy mohiyati qanday ifodalangan?",
     options: [
-      "Xususiy investor ob'ektni quradi, muayyan muddat foydalanadi, keyin davlatga topshiradi",
-      "Davlat quradi, xususiy sektorga sotadi",
-      "Xususiy sektor quradi va doimiy egalik qiladi",
-      "Xalqaro tashkilot quradi va boshqaradi",
+      "Iqtisodiy tizimdan tashqaridagi mustaqil sektor",
+      "Iqtisodiy tizimning asosi, poydevori va ichki tuzilmasi",
+      "Faqat ishlab chiqarish binolari majmui",
+      "Faqat davlat moliyalashtiradigan obyektlar majmui"
     ],
-    correct: 0,
-  },
-  {
-    question: "Infratuzilma loyihalarini moliyalashtirishda obligatsiyalar qanday rol o'ynaydi?",
+      correct: 1
+},
+{
+  question: "Infratuzilma iqtisodiyoti fanining vazifasi qaysi javobda to‘g‘ri ifodalangan?",
     options: [
-      "Infratuzilma obligatsiyalari orqali uzoq muddatli investitsiya mablag'larini jalb qilish mumkin",
-      "Obligatsiyalar faqat qisqa muddatli foydalar uchun ishlatiladi",
-      "Infratuzilma loyihalarida obligatsiyalar ishlatilmaydi",
-      "Obligatsiyalar faqat xorijiy valyutada chiqariladi",
+      "Faqat infratuzilma obyektlari sonini hisoblash",
+      "Bozor ishtirokchilari va infratuzilmalar rivojlanishi, qonuniyatlari hamda harakatlari modellarini optimallashtirish",
+      "Korxonalarning faqat ishlab chiqarish hajmini oshirish",
+      "Davlat budjeti xarajatlarini kamaytirish"
     ],
-    correct: 0,
-  },
-  {
-    question: "Suv ta'minoti infratuzilmasining qishloq xo'jaligidagi ahamiyati nimada?",
+      correct: 1
+},
+{
+  question: "Qaysi holat iqtisodiy o‘sishni to‘liqroq ifodalaydi?",
     options: [
-      "Sug'orish tizimlarini ta'minlab, qishloq xo'jaligi mahsullarining hosildorligini oshiradi",
-      "Qishloq xo'jaligiga aloqasi yo'q",
-      "Faqat shahar aholisi uchun ahamiyatli",
-      "Faqat sanoat korxonalari uchun kerak",
+      "Faqat YIMning mutlaq ko‘payishi",
+      "Faqat aholi sonining ko‘payishi",
+      "YIMning mutlaq va aholi jon boshiga o‘sishi, resurs samaradorligi, sifat va tarkibning yaxshilanishi",
+      "Faqat davlat xarajatlarining ko‘payishi"
     ],
-    correct: 0,
-  },
-  {
-    question: "Logistika markazlarining mintaqaviy iqtisodiyotga ta'siri qanday?",
+      correct: 2
+},
+{
+  question: "Infratuzilmaning makroiqtisodiy o‘sishga bilvosita ta’siri qanday namoyon bo‘ladi?",
     options: [
-      "Tranzit savdoni rivojlantiradi, ish o'rinlari yaratadi va hududning raqobatbardoshligini oshiradi",
-      "Faqat ombor xo'jaligini tashkil qiladi",
-      "Mintaqaviy iqtisodiyotga ta'sir qilmaydi",
-      "Faqat import operatsiyalari uchun kerak",
+      "Faqat soliqlarni kamaytirish orqali",
+      "Ishlab chiqarish omillarini rag‘batlantirish yoki ularning samaradorligini oshirish orqali",
+      "Importni to‘liq cheklash orqali",
+      "Pul massasini ko‘paytirish orqali"
     ],
-    correct: 0,
-  },
-  {
-    question: "Infratuzilma indeksida qaysi ko'rsatkichlar hisobga olinadi?",
+      correct: 1
+},
+{
+  question: "Slaydda keltirilgan Mark Zandi fikriga ko‘ra, infratuzilmaga sarflangan har bir dollar qancha daromad keltiradi?",
     options: [
-      "Transport, energetika, aloqa, suv ta'minoti va ijtimoiy infratuzilma sifati",
-      "Faqat yo'llarning umumiy uzunligi",
-      "Faqat aholi soni va YaIM",
-      "Faqat harbiy salohiyat ko'rsatkichlari",
+      "1,09 dollar",
+      "1,29 dollar",
+      "1,59 dollar",
+      "2,59 dollar"
     ],
-    correct: 0,
-  },
-  {
-    question: "Yashil infratuzilma loyihalariga investitsiya kiritishning iqtisodiy foydasi nimada?",
+      correct: 2
+},
+{
+  question: "2021–2025-yillarda besh soha orasida jami asosiy kapitalga investitsiya hajmi eng katta bo‘lgan soha qaysi?",
     options: [
-      "Uzoq muddatda energiya tejash, ekologik zararni kamaytirish va barqaror iqtisodiy o'sishni ta'minlaydi",
-      "Qisqa muddatda katta foyda keltiradi",
-      "Iqtisodiy foydasi yo'q, faqat ekologik maqsadda",
-      "Faqat rivojlangan davlatlar uchun foydali",
+      "Transport va saqlash",
+      "Ishlab chiqarish sanoati",
+      "Axborot va aloqa",
+      "Elektr energiyasi, gaz, bug‘ va konditsiyalash"
     ],
-    correct: 0,
-  },
-  {
-    question: "O'zbekistonda transport yo'laklari (koridorlari)ning ahamiyati nimada?",
+      correct: 1
+},
+{
+  question: "Besh soha ichida real o‘sish ko‘rsatkichi eng yuqori bo‘lgan soha qaysi?",
     options: [
-      "Xalqaro tranzit savdoda O'zbekistonning geografik mavqeidan samarali foydalanish imkonini beradi",
-      "Faqat ichki transport uchun kerak",
-      "Transport yo'laklari iqtisodiyotga ta'sir qilmaydi",
-      "Faqat yo'lovchi tashish uchun xizmat qiladi",
+      "Ishlab chiqarish sanoati",
+      "Elektr energetikasi",
+      "Transport va saqlash",
+      "Axborot va aloqa"
     ],
-    correct: 0,
-  },
-  {
-    question: "Amortizatsiya infratuzilma ob'ektlarida qanday ahamiyatga ega?",
+      correct: 3
+},
+{
+  question: "“Eng ko‘p investitsiya kiritilgan soha doimo eng tez o‘sadi” fikriga qaysi natija zid keladi?",
     options: [
-      "Ob'ektlarning eskirish darajasini hisoblab, o'z vaqtida ta'mirlash yoki yangilash rejasini tuzishga yordam beradi",
-      "Amortizatsiya faqat buxgalteriya hisobi uchun kerak",
-      "Infratuzilma ob'ektlari eskirmasligi sababli amortizatsiya hisoblanmaydi",
-      "Amortizatsiya faqat sanoat uskunalariga tegishli",
+      "Ishlab chiqarish sanoatida 516,299 trln so‘m investitsiya va +40,9% o‘sish, axborot va aloqada 52,019 trln so‘m investitsiya va +202,8% o‘sish",
+      "Barcha sohalarda investitsiyalar mavjudligi",
+      "Transportga investitsiyalar kiritilgani",
+      "Energetikada o‘sish kuzatilgani"
     ],
-    correct: 0,
-  },
-  {
-    question: "Infratuzilma sohasida tabiiy monopoliya tushunchasi nimani anglatadi?",
+      correct: 0
+},
+{
+  question: "239,280 trln so‘m jami investitsiya va +52,0% real o‘sish qaysi sohaga tegishli?",
     options: [
-      "Ba'zi infratuzilma tarmoqlarida raqobat samarasiz bo'lib, bitta operator samaraliroq xizmat ko'rsatadi",
-      "Barcha infratuzilma sohalari erkin raqobatga asoslangan",
-      "Tabiiy monopoliya faqat savdo sohasiga tegishli",
-      "Tabiiy monopoliya qonun bilan taqiqlangan",
+      "Ishlab chiqarish sanoati",
+      "Elektr energiyasi, gaz, bug‘ va konditsiyalash",
+      "Transport va saqlash",
+      "Qishloq, o‘rmon va baliqchilik xo‘jaligi"
     ],
-    correct: 0,
-  },
-  {
-    question: "Infratuzilma loyihalarida texnik-iqtisodiy asoslash (TEA) nima uchun zarur?",
+      correct: 1
+},
+{
+  question: "Transport va saqlash sohasining 2021–2025-yillardagi jami investitsiyasi va real o‘sishi qaysi?",
     options: [
-      "Loyihaning iqtisodiy samaradorligini, xarajatlarini va daromadlarini oldindan baholash uchun",
-      "Faqat hukumat talabi bo'lgani uchun",
-      "TEA faqat xorijiy loyihalar uchun kerak",
-      "TEA loyihaning texnik tomonini o'rganmaydi",
+      "117,745 trln so‘m; +63,9%",
+      "122,357 trln so‘m; +21,1%",
+      "239,280 trln so‘m; +52,0%",
+      "52,019 trln so‘m; +202,8%"
     ],
-    correct: 0,
-  },
-  {
-    question: "Telekommunikatsiya infratuzilmasining rivojlanishi aholining hayot sifatiga qanday ta'sir qiladi?",
+      correct: 0
+},
+{
+  question: "Transport, energetika, aloqa va boshqa elementlarni o‘zaro bog‘langan yagona majmua sifatida tahlil qilish qaysi yondashuvga mos?",
     options: [
-      "Masofaviy ta'lim, telemedicina, elektron hukumat xizmatlariga kirishni ta'minlaydi",
-      "Faqat ko'ngilochar maqsadlarga xizmat qiladi",
-      "Aholining hayot sifatiga ta'sir qilmaydi",
-      "Faqat biznes uchun foydali",
+      "Tizimli yondashuv",
+      "Faqat induksiya",
+      "Faqat tarixiy usul",
+      "Ilmiy abstraksiyadan voz kechish"
     ],
-    correct: 0,
-  },
-  {
-    question: "Infratuzilma investitsiyalarining qaytarilish muddati odatda qanday?",
+      correct: 0
+},
+{
+  question: "Investitsiya va real o‘sish ma’lumotlarini birgalikda tahlil qilganda qaysi xulosa ma’lumotlarga bevosita mos?",
     options: [
-      "Uzoq muddatli — 10-30 yil oralig'ida, lekin barqaror iqtisodiy va ijtimoiy samara beradi",
-      "Qisqa muddatli — 1-2 yil ichida to'liq qaytariladi",
-      "Investitsiya hech qachon qaytarilmaydi",
-      "Qaytarilish muddati 6 oy",
+      "Investitsiya va o‘sish barcha sohalarda bir xil tartibda o‘zgaradi",
+      "Eng kam investitsiya olgan soha albatta eng past o‘sishga ega",
+      "Investitsiya hajmi va real o‘sish sur’ati bo‘yicha sohalarning reytingi bir xil emas",
+      "Investitsiya real o‘sishga hech qanday aloqador emas"
     ],
-    correct: 0,
-  },
+      correct: 2
+}
 ];
 
 // ═══════════════════════════════════════════════════════════════
 // Foydalanuvchi sessiyalari
 // ═══════════════════════════════════════════════════════════════
 const sessions = new Map();
-const TIME_LIMIT_MS = 15 * 60 * 1000; // 15 daqiqa
+const TIME_LIMIT_MS = 10 * 60 * 1000; // 10 daqiqa
 
 function shuffleArray(arr) {
   const shuffled = [...arr];
@@ -380,68 +380,18 @@ ${timeOut ? '⏰ *Vaqt tugadi!*\n\n' : '✅ *Test yakunlandi!*\n\n'}📊 *Siznin
 
 📊 *Natija:*
 ├ ✅ To'g'ri: ${correct} / ${total}
-├ ❌ Noto'g'ri: ${wrong}
-├ ⏭ Javob berilmagan: ${unanswered}
-├ 📈 Foiz: ${percentage}%
-├ 🎓 Baho: ${grade}
-└ ⏱ Vaqt: ${minutes} daq. ${seconds} son.
+└ 🎓 Baho: ${grade}
 ${timeOut ? '\n⚠️ Vaqt tugaganligi sababli test avtomatik yakunlandi.' : ''}
 `;
 
-  // Batafsil javoblarni alohida xabarda yuborish (Telegram 4096 belgi limiti uchun)
-  let details = '━━━━━━━━━━━━━━━━━━━━━━━━\n*Batafsil javoblar:*\n';
-
-  session.questions.forEach((q, i) => {
-    const userAnswer = session.answers[i];
-    const isCorrect = userAnswer === q.correct;
-    const status = userAnswer === undefined ? '⏭' : isCorrect ? '✅' : '❌';
-    const userOpt = userAnswer !== undefined ? `${getOptionLetter(userAnswer)}) ${q.options[userAnswer]}` : 'Javob berilmagan';
-    const correctOpt = `${getOptionLetter(q.correct)}) ${q.options[q.correct]}`;
-
-    details += `\n${status} *${i + 1}.* ${q.question}\n`;
-    details += `   Javob: ${userOpt}\n`;
-    if (userAnswer !== q.correct) {
-      details += `   To'g'ri: ${correctOpt}\n`;
-    }
-  });
-
-  // Adminga asosiy natijani yuborish
+  // Adminga faqat to'g'ri javob va baho yuboriladi
   bot.sendMessage(ADMIN_ID, adminReport, {
     parse_mode: 'Markdown',
-  }).then(() => {
-    // Keyin batafsil javoblarni yuborish
-    // Telegram xabar limiti 4096 belgi, shuning uchun bo'lib yuboramiz
-    const chunks = splitMessage(details, 4000);
-    chunks.forEach((chunk, idx) => {
-      setTimeout(() => {
-        bot.sendMessage(ADMIN_ID, chunk, { parse_mode: 'Markdown' }).catch(console.error);
-      }, idx * 500);
-    });
   }).catch((err) => {
     console.error('❌ Adminga xabar yuborishda xatolik:', err.message);
   });
 
   sessions.delete(chatId);
-}
-
-// Uzun xabarlarni bo'lib yuborish
-function splitMessage(text, maxLength) {
-  if (text.length <= maxLength) return [text];
-
-  const chunks = [];
-  let current = '';
-  const lines = text.split('\n');
-
-  for (const line of lines) {
-    if ((current + '\n' + line).length > maxLength) {
-      if (current) chunks.push(current);
-      current = line;
-    } else {
-      current = current ? current + '\n' + line : line;
-    }
-  }
-  if (current) chunks.push(current);
-  return chunks;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -463,7 +413,7 @@ bot.onText(/\/start/, (msg) => {
 
 📚 *Fan:* Infratuzilma iqtisodiyoti
 📝 *Savollar soni:* 20 ta
-⏱ *Vaqt:* 15 daqiqa
+⏱ *Vaqt:* 10 daqiqa
 🔀 *Savollar va javoblar aralashtirilgan*
 
 📌 *Qoidalar:*
@@ -471,6 +421,7 @@ bot.onText(/\/start/, (msg) => {
 • Javob tanlagandan keyin ortga qaytib bo'lmaydi
 • Vaqt tugasa test avtomatik yakunlanadi
 • Natija o'qituvchiga yuboriladi
+• Ishlagan savollaringiz to'g'ri yoki noto'g'riligi sizga sir qoladi
 
 Tayyor bo'lsangiz quyidagi tugmani bosing 👇
   `;
@@ -532,7 +483,7 @@ bot.on('callback_query', (query) => {
 
     bot.answerCallbackQuery(query.id, { text: '✅ Test boshlandi! Omad!' });
 
-    bot.sendMessage(chatId, '⏱ *Test boshlandi!* Sizda 15 daqiqa vaqt bor.\n\nOmad tilayman! 🍀', {
+    bot.sendMessage(chatId, '⏱ *Test boshlandi!* Sizda 10 daqiqa vaqt bor.\n\nOmad tilayman! 🍀', {
       parse_mode: 'Markdown',
       protect_content: true,
     });
@@ -568,14 +519,12 @@ bot.on('callback_query', (query) => {
     session.answeredCount++;
 
     const q = session.questions[qIndex];
-    const isCorrect = aIndex === q.correct;
-
-    if (isCorrect) {
+    if (aIndex === q.correct) {
       session.correctAnswers++;
-      bot.answerCallbackQuery(query.id, { text: '✅ To\'g\'ri!' });
-    } else {
-      bot.answerCallbackQuery(query.id, { text: '❌ Noto\'g\'ri!' });
     }
+
+    // Talabaga javobi to'g'ri yoki noto'g'riligi aytilmaydi
+    bot.answerCallbackQuery(query.id, { text: '✅ Javob qayd etildi!' });
 
     session.currentQuestion = qIndex + 1;
     sendQuestion(chatId);
