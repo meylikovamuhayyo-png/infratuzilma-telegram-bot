@@ -47,194 +47,194 @@ const ALL_QUESTIONS = [
   },
   {
     question: "Korxonada elektr energiyasi va internetning 24 soat uzilishi eng avvalo nimani ko‘rsatadi?",
-    options:
+    options: [
       "Infratuzilmaning iqtisodiy tizim faoliyatining zarur sharti ekanini",
-    "Infratuzilma faqat davlat sektoriga xizmat qilishini",
-    "Ishlab chiqarish infratuzilmadan mustaqil ekanini",
-    "Infratuzilmaning faqat ijtimoiy vazifa bajarishini"
+      "Infratuzilma faqat davlat sektoriga xizmat qilishini",
+      "Ishlab chiqarish infratuzilmadan mustaqil ekanini",
+      "Infratuzilmaning faqat ijtimoiy vazifa bajarishini"
     ],
-  correct: 0
+    correct: 0
   },
-{
-  question: "Qashqadaryo va Samarqand transport infratuzilmasidagi farqlarni aniqlash uchun qaysi usul eng mos?",
+  {
+    question: "Qashqadaryo va Samarqand transport infratuzilmasidagi farqlarni aniqlash uchun qaysi usul eng mos?",
     options: [
       "Prognozlash",
       "Ekonometrik usul",
       "Taqqoslash",
       "Ilmiy abstraksiya"
     ],
-      correct: 2
-},
-{
-  question: "2021–2025-yillarda infratuzilmaga yo‘naltirilgan investitsiyalarning yillar bo‘yicha o‘zgarishini o‘rganishda qaysi usul mos?",
+    correct: 2
+  },
+  {
+    question: "2021–2025-yillarda infratuzilmaga yo‘naltirilgan investitsiyalarning yillar bo‘yicha o‘zgarishini o‘rganishda qaysi usul mos?",
     options: [
       "Statistik tahlil",
       "Deduksiya",
       "Taqqoslash",
       "Ilmiy abstraksiya"
     ],
-      correct: 0
-},
-{
-  question: "Investitsiyalar hajmi bilan iqtisodiy o‘sish o‘rtasidagi bog‘liqlikning miqdoriy darajasini aniqlash uchun qaysi usul tanlanadi?",
+    correct: 0
+  },
+  {
+    question: "Investitsiyalar hajmi bilan iqtisodiy o‘sish o‘rtasidagi bog‘liqlikning miqdoriy darajasini aniqlash uchun qaysi usul tanlanadi?",
     options: [
       "Tarixiy usul",
       "Ekonometrik usul",
       "Mantiqiy usul",
       "Taqqoslash"
     ],
-      correct: 1
-},
-{
-  question: "2030-yilgacha infratuzilmaga bo‘lgan ehtiyojni aniqlash vazifasiga qaysi usul bevosita mos?",
+    correct: 1
+  },
+  {
+    question: "2030-yilgacha infratuzilmaga bo‘lgan ehtiyojni aniqlash vazifasiga qaysi usul bevosita mos?",
     options: [
       "Taqqoslash",
       "Statistik guruhlash",
       "Prognozlash",
       "Ilmiy abstraksiya"
     ],
-      correct: 2
-},
-{
-  question: "Qaysi biri slaydda keltirilgan umumiy ilmiy tadqiqot usullari tarkibiga kirmaydi?",
+    correct: 2
+  },
+  {
+    question: "Qaysi biri slaydda keltirilgan umumiy ilmiy tadqiqot usullari tarkibiga kirmaydi?",
     options: [
       "Induksiya va deduksiya",
       "Tahlil va sintez",
       "Tizimli yondashuv",
       "Ekonometrik modellashtirish"
     ],
-      correct: 3
-},
-{
-  question: "Infratuzilma tizimini elementlarga ajratib o‘rganib, keyin ularni yagona tizim sifatida birlashtirishda qaysi usullar qo‘llanadi?",
+    correct: 3
+  },
+  {
+    question: "Infratuzilma tizimini elementlarga ajratib o‘rganib, keyin ularni yagona tizim sifatida birlashtirishda qaysi usullar qo‘llanadi?",
     options: [
       "Induksiya va deduksiya",
       "Tahlil va sintez",
       "Tarixiy va mantiqiy",
       "Taqqoslash va prognozlash"
     ],
-      correct: 1
-},
-{
-  question: "Slaydda infratuzilma tushunchasining iqtisodiy mohiyati qanday ifodalangan?",
+    correct: 1
+  },
+  {
+    question: "Slaydda infratuzilma tushunchasining iqtisodiy mohiyati qanday ifodalangan?",
     options: [
       "Iqtisodiy tizimdan tashqaridagi mustaqil sektor",
       "Iqtisodiy tizimning asosi, poydevori va ichki tuzilmasi",
       "Faqat ishlab chiqarish binolari majmui",
       "Faqat davlat moliyalashtiradigan obyektlar majmui"
     ],
-      correct: 1
-},
-{
-  question: "Infratuzilma iqtisodiyoti fanining vazifasi qaysi javobda to‘g‘ri ifodalangan?",
+    correct: 1
+  },
+  {
+    question: "Infratuzilma iqtisodiyoti fanining vazifasi qaysi javobda to‘g‘ri ifodalangan?",
     options: [
       "Faqat infratuzilma obyektlari sonini hisoblash",
       "Bozor ishtirokchilari va infratuzilmalar rivojlanishi, qonuniyatlari hamda harakatlari modellarini optimallashtirish",
       "Korxonalarning faqat ishlab chiqarish hajmini oshirish",
       "Davlat budjeti xarajatlarini kamaytirish"
     ],
-      correct: 1
-},
-{
-  question: "Qaysi holat iqtisodiy o‘sishni to‘liqroq ifodalaydi?",
+    correct: 1
+  },
+  {
+    question: "Qaysi holat iqtisodiy o‘sishni to‘liqroq ifodalaydi?",
     options: [
       "Faqat YIMning mutlaq ko‘payishi",
       "Faqat aholi sonining ko‘payishi",
       "YIMning mutlaq va aholi jon boshiga o‘sishi, resurs samaradorligi, sifat va tarkibning yaxshilanishi",
       "Faqat davlat xarajatlarining ko‘payishi"
     ],
-      correct: 2
-},
-{
-  question: "Infratuzilmaning makroiqtisodiy o‘sishga bilvosita ta’siri qanday namoyon bo‘ladi?",
+    correct: 2
+  },
+  {
+    question: "Infratuzilmaning makroiqtisodiy o‘sishga bilvosita ta’siri qanday namoyon bo‘ladi?",
     options: [
       "Faqat soliqlarni kamaytirish orqali",
       "Ishlab chiqarish omillarini rag‘batlantirish yoki ularning samaradorligini oshirish orqali",
       "Importni to‘liq cheklash orqali",
       "Pul massasini ko‘paytirish orqali"
     ],
-      correct: 1
-},
-{
-  question: "Slaydda keltirilgan Mark Zandi fikriga ko‘ra, infratuzilmaga sarflangan har bir dollar qancha daromad keltiradi?",
+    correct: 1
+  },
+  {
+    question: "Slaydda keltirilgan Mark Zandi fikriga ko‘ra, infratuzilmaga sarflangan har bir dollar qancha daromad keltiradi?",
     options: [
       "1,09 dollar",
       "1,29 dollar",
       "1,59 dollar",
       "2,59 dollar"
     ],
-      correct: 2
-},
-{
-  question: "2021–2025-yillarda besh soha orasida jami asosiy kapitalga investitsiya hajmi eng katta bo‘lgan soha qaysi?",
+    correct: 2
+  },
+  {
+    question: "2021–2025-yillarda besh soha orasida jami asosiy kapitalga investitsiya hajmi eng katta bo‘lgan soha qaysi?",
     options: [
       "Transport va saqlash",
       "Ishlab chiqarish sanoati",
       "Axborot va aloqa",
       "Elektr energiyasi, gaz, bug‘ va konditsiyalash"
     ],
-      correct: 1
-},
-{
-  question: "Besh soha ichida real o‘sish ko‘rsatkichi eng yuqori bo‘lgan soha qaysi?",
+    correct: 1
+  },
+  {
+    question: "Besh soha ichida real o‘sish ko‘rsatkichi eng yuqori bo‘lgan soha qaysi?",
     options: [
       "Ishlab chiqarish sanoati",
       "Elektr energetikasi",
       "Transport va saqlash",
       "Axborot va aloqa"
     ],
-      correct: 3
-},
-{
-  question: "“Eng ko‘p investitsiya kiritilgan soha doimo eng tez o‘sadi” fikriga qaysi natija zid keladi?",
+    correct: 3
+  },
+  {
+    question: "“Eng ko‘p investitsiya kiritilgan soha doimo eng tez o‘sadi” fikriga qaysi natija zid keladi?",
     options: [
       "Ishlab chiqarish sanoatida 516,299 trln so‘m investitsiya va +40,9% o‘sish, axborot va aloqada 52,019 trln so‘m investitsiya va +202,8% o‘sish",
       "Barcha sohalarda investitsiyalar mavjudligi",
       "Transportga investitsiyalar kiritilgani",
       "Energetikada o‘sish kuzatilgani"
     ],
-      correct: 0
-},
-{
-  question: "239,280 trln so‘m jami investitsiya va +52,0% real o‘sish qaysi sohaga tegishli?",
+    correct: 0
+  },
+  {
+    question: "239,280 trln so‘m jami investitsiya va +52,0% real o‘sish qaysi sohaga tegishli?",
     options: [
       "Ishlab chiqarish sanoati",
       "Elektr energiyasi, gaz, bug‘ va konditsiyalash",
       "Transport va saqlash",
       "Qishloq, o‘rmon va baliqchilik xo‘jaligi"
     ],
-      correct: 1
-},
-{
-  question: "Transport va saqlash sohasining 2021–2025-yillardagi jami investitsiyasi va real o‘sishi qaysi?",
+    correct: 1
+  },
+  {
+    question: "Transport va saqlash sohasining 2021–2025-yillardagi jami investitsiyasi va real o‘sishi qaysi?",
     options: [
       "117,745 trln so‘m; +63,9%",
       "122,357 trln so‘m; +21,1%",
       "239,280 trln so‘m; +52,0%",
       "52,019 trln so‘m; +202,8%"
     ],
-      correct: 0
-},
-{
-  question: "Transport, energetika, aloqa va boshqa elementlarni o‘zaro bog‘langan yagona majmua sifatida tahlil qilish qaysi yondashuvga mos?",
+    correct: 0
+  },
+  {
+    question: "Transport, energetika, aloqa va boshqa elementlarni o‘zaro bog‘langan yagona majmua sifatida tahlil qilish qaysi yondashuvga mos?",
     options: [
       "Tizimli yondashuv",
       "Faqat induksiya",
       "Faqat tarixiy usul",
       "Ilmiy abstraksiyadan voz kechish"
     ],
-      correct: 0
-},
-{
-  question: "Investitsiya va real o‘sish ma’lumotlarini birgalikda tahlil qilganda qaysi xulosa ma’lumotlarga bevosita mos?",
+    correct: 0
+  },
+  {
+    question: "Investitsiya va real o‘sish ma’lumotlarini birgalikda tahlil qilganda qaysi xulosa ma’lumotlarga bevosita mos?",
     options: [
       "Investitsiya va o‘sish barcha sohalarda bir xil tartibda o‘zgaradi",
       "Eng kam investitsiya olgan soha albatta eng past o‘sishga ega",
       "Investitsiya hajmi va real o‘sish sur’ati bo‘yicha sohalarning reytingi bir xil emas",
       "Investitsiya real o‘sishga hech qanday aloqador emas"
     ],
-      correct: 2
-}
+    correct: 2
+  }
 ];
 
 // ═══════════════════════════════════════════════════════════════
