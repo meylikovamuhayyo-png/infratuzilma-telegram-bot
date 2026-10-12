@@ -1,7 +1,12 @@
 require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 
+// ═══════════════════════════════════════════════════════════════
+// Express Web Server (для Render)
+// ═══════════════════════════════════════════════════════════════
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -13,28 +18,54 @@ app.listen(PORT, () => {
   console.log(`🌐 Express web-server ${PORT}-portda ishga tushdi.`);
 });
 
+// ═══════════════════════════════════════════════════════════════
+// Настройки Бота и Администратора
+// ═══════════════════════════════════════════════════════════════
 const TOKEN = process.env.BOT_TOKEN;
 const ADMIN_ID = process.env.ADMIN_ID;
 
-if (!TOKEN || TOKEN === 'your_bot_token_here') {
-  console.error('❌ BOT_TOKEN topilmadi!');
-  process.exit(1);
-}
-
-if (!ADMIN_ID) {
-  console.error('❌ ADMIN_ID topilmadi!');
+if (!TOKEN || !ADMIN_ID) {
+  console.error('❌ BOT_TOKEN yoki ADMIN_ID topilmadi!');
   process.exit(1);
 }
 
 const bot = new TelegramBot(TOKEN, { polling: true });
-
 console.log('🤖 Bot ishga tushdi!');
-console.log(`📋 Admin ID: ${ADMIN_ID}`);
 
 // ═══════════════════════════════════════════════════════════════
-// 20 ta savol — Infratuzilma iqtisodiyoti (Orta daraja)
+// База данных студентов (для Soha iqtisodiyoti)
 // ═══════════════════════════════════════════════════════════════
-const ALL_QUESTIONS = [
+const SOHA_STUDENTS_PATH = path.join(__dirname, 'soha iqtisodiyoti va menejmenti', 'students.json');
+
+function loadSohaStudentsDB() {
+  try {
+    if (fs.existsSync(SOHA_STUDENTS_PATH)) {
+      const data = fs.readFileSync(SOHA_STUDENTS_PATH, 'utf-8');
+      return JSON.parse(data);
+    }
+  } catch (err) {
+    console.error('❌ Talabalar bazasini yuklashda xatolik:', err.message);
+  }
+  return { groups: {} };
+}
+
+function findSohaStudent(fullName) {
+  const db = loadSohaStudentsDB();
+  const searchName = fullName.trim().toLowerCase();
+  for (const [groupName, students] of Object.entries(db.groups)) {
+    for (const student of students) {
+      if (student.toLowerCase() === searchName) {
+        return { found: true, name: student, group: groupName };
+      }
+    }
+  }
+  return { found: false };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// 1. Тестовые вопросы по предмету Infratuzilma iqtisodiyoti
+// ═══════════════════════════════════════════════════════════════
+const INFRATUZILMA_QUESTIONS = [
   {
     question: "Infratuzilma iqtisodiyoti fanining predmetini eng aniq ifodalovchi javobni aniqlang.",
     options: [
@@ -54,194 +85,171 @@ const ALL_QUESTIONS = [
       "Infratuzilmaning faqat ijtimoiy vazifa bajarishini"
     ],
     correct: 0
-  },
-  {
-    question: "Qashqadaryo va Samarqand transport infratuzilmasidagi farqlarni aniqlash uchun qaysi usul eng mos?",
-    options: [
-      "Prognozlash",
-      "Ekonometrik usul",
-      "Taqqoslash",
-      "Ilmiy abstraksiya"
-    ],
-    correct: 2
-  },
-  {
-    question: "2021–2025-yillarda infratuzilmaga yo‘naltirilgan investitsiyalarning yillar bo‘yicha o‘zgarishini o‘rganishda qaysi usul mos?",
-    options: [
-      "Statistik tahlil",
-      "Deduksiya",
-      "Taqqoslash",
-      "Ilmiy abstraksiya"
-    ],
-    correct: 0
-  },
-  {
-    question: "Investitsiyalar hajmi bilan iqtisodiy o‘sish o‘rtasidagi bog‘liqlikning miqdoriy darajasini aniqlash uchun qaysi usul tanlanadi?",
-    options: [
-      "Tarixiy usul",
-      "Ekonometrik usul",
-      "Mantiqiy usul",
-      "Taqqoslash"
-    ],
-    correct: 1
-  },
-  {
-    question: "2030-yilgacha infratuzilmaga bo‘lgan ehtiyojni aniqlash vazifasiga qaysi usul bevosita mos?",
-    options: [
-      "Taqqoslash",
-      "Statistik guruhlash",
-      "Prognozlash",
-      "Ilmiy abstraksiya"
-    ],
-    correct: 2
-  },
-  {
-    question: "Qaysi biri slaydda keltirilgan umumiy ilmiy tadqiqot usullari tarkibiga kirmaydi?",
-    options: [
-      "Induksiya va deduksiya",
-      "Tahlil va sintez",
-      "Tizimli yondashuv",
-      "Ekonometrik modellashtirish"
-    ],
-    correct: 3
-  },
-  {
-    question: "Infratuzilma tizimini elementlarga ajratib o‘rganib, keyin ularni yagona tizim sifatida birlashtirishda qaysi usullar qo‘llanadi?",
-    options: [
-      "Induksiya va deduksiya",
-      "Tahlil va sintez",
-      "Tarixiy va mantiqiy",
-      "Taqqoslash va prognozlash"
-    ],
-    correct: 1
-  },
-  {
-    question: "Slaydda infratuzilma tushunchasining iqtisodiy mohiyati qanday ifodalangan?",
-    options: [
-      "Iqtisodiy tizimdan tashqaridagi mustaqil sektor",
-      "Iqtisodiy tizimning asosi, poydevori va ichki tuzilmasi",
-      "Faqat ishlab chiqarish binolari majmui",
-      "Faqat davlat moliyalashtiradigan obyektlar majmui"
-    ],
-    correct: 1
-  },
-  {
-    question: "Infratuzilma iqtisodiyoti fanining vazifasi qaysi javobda to‘g‘ri ifodalangan?",
-    options: [
-      "Faqat infratuzilma obyektlari sonini hisoblash",
-      "Bozor ishtirokchilari va infratuzilmalar rivojlanishi, qonuniyatlari hamda harakatlari modellarini optimallashtirish",
-      "Korxonalarning faqat ishlab chiqarish hajmini oshirish",
-      "Davlat budjeti xarajatlarini kamaytirish"
-    ],
-    correct: 1
-  },
-  {
-    question: "Qaysi holat iqtisodiy o‘sishni to‘liqroq ifodalaydi?",
-    options: [
-      "Faqat YIMning mutlaq ko‘payishi",
-      "Faqat aholi sonining ko‘payishi",
-      "YIMning mutlaq va aholi jon boshiga o‘sishi, resurs samaradorligi, sifat va tarkibning yaxshilanishi",
-      "Faqat davlat xarajatlarining ko‘payishi"
-    ],
-    correct: 2
-  },
-  {
-    question: "Infratuzilmaning makroiqtisodiy o‘sishga bilvosita ta’siri qanday namoyon bo‘ladi?",
-    options: [
-      "Faqat soliqlarni kamaytirish orqali",
-      "Ishlab chiqarish omillarini rag‘batlantirish yoki ularning samaradorligini oshirish orqali",
-      "Importni to‘liq cheklash orqali",
-      "Pul massasini ko‘paytirish orqali"
-    ],
-    correct: 1
-  },
-  {
-    question: "Slaydda keltirilgan Mark Zandi fikriga ko‘ra, infratuzilmaga sarflangan har bir dollar qancha daromad keltiradi?",
-    options: [
-      "1,09 dollar",
-      "1,29 dollar",
-      "1,59 dollar",
-      "2,59 dollar"
-    ],
-    correct: 2
-  },
-  {
-    question: "2021–2025-yillarda besh soha orasida jami asosiy kapitalga investitsiya hajmi eng katta bo‘lgan soha qaysi?",
-    options: [
-      "Transport va saqlash",
-      "Ishlab chiqarish sanoati",
-      "Axborot va aloqa",
-      "Elektr energiyasi, gaz, bug‘ va konditsiyalash"
-    ],
-    correct: 1
-  },
-  {
-    question: "Besh soha ichida real o‘sish ko‘rsatkichi eng yuqori bo‘lgan soha qaysi?",
-    options: [
-      "Ishlab chiqarish sanoati",
-      "Elektr energetikasi",
-      "Transport va saqlash",
-      "Axborot va aloqa"
-    ],
-    correct: 3
-  },
-  {
-    question: "“Eng ko‘p investitsiya kiritilgan soha doimo eng tez o‘sadi” fikriga qaysi natija zid keladi?",
-    options: [
-      "Ishlab chiqarish sanoatida 516,299 trln so‘m investitsiya va +40,9% o‘sish, axborot va aloqada 52,019 trln so‘m investitsiya va +202,8% o‘sish",
-      "Barcha sohalarda investitsiyalar mavjudligi",
-      "Transportga investitsiyalar kiritilgani",
-      "Energetikada o‘sish kuzatilgani"
-    ],
-    correct: 0
-  },
-  {
-    question: "239,280 trln so‘m jami investitsiya va +52,0% real o‘sish qaysi sohaga tegishli?",
-    options: [
-      "Ishlab chiqarish sanoati",
-      "Elektr energiyasi, gaz, bug‘ va konditsiyalash",
-      "Transport va saqlash",
-      "Qishloq, o‘rmon va baliqchilik xo‘jaligi"
-    ],
-    correct: 1
-  },
-  {
-    question: "Transport va saqlash sohasining 2021–2025-yillardagi jami investitsiyasi va real o‘sishi qaysi?",
-    options: [
-      "117,745 trln so‘m; +63,9%",
-      "122,357 trln so‘m; +21,1%",
-      "239,280 trln so‘m; +52,0%",
-      "52,019 trln so‘m; +202,8%"
-    ],
-    correct: 0
-  },
-  {
-    question: "Transport, energetika, aloqa va boshqa elementlarni o‘zaro bog‘langan yagona majmua sifatida tahlil qilish qaysi yondashuvga mos?",
-    options: [
-      "Tizimli yondashuv",
-      "Faqat induksiya",
-      "Faqat tarixiy usul",
-      "Ilmiy abstraksiyadan voz kechish"
-    ],
-    correct: 0
-  },
-  {
-    question: "Investitsiya va real o‘sish ma’lumotlarini birgalikda tahlil qilganda qaysi xulosa ma’lumotlarga bevosita mos?",
-    options: [
-      "Investitsiya va o‘sish barcha sohalarda bir xil tartibda o‘zgaradi",
-      "Eng kam investitsiya olgan soha albatta eng past o‘sishga ega",
-      "Investitsiya hajmi va real o‘sish sur’ati bo‘yicha sohalarning reytingi bir xil emas",
-      "Investitsiya real o‘sishga hech qanday aloqador emas"
-    ],
-    correct: 2
   }
 ];
 
 // ═══════════════════════════════════════════════════════════════
-// Foydalanuvchi sessiyalari
+// 2. Тестовые вопросы по предмету Soha iqtisodiyoti va menejmenti
+// ═══════════════════════════════════════════════════════════════
+const SOHA_QUESTIONS = [
+  {
+    question: "1. Asosiy fondlarning aylanma aktivlardan asosiy farqi nimada?",
+    options: [
+      "Bir ishlab chiqarish davrida sarflanib, qiymatini to'liq o'tkazadi",
+      "Sotish uchun saqlanib, qiymatini savdo jarayonida shakllantiradi",
+      "Uzoq muddat foydalanilib, qiymatini mahsulotga qismlab o'tkazadi",
+      "Qisqa muddat foydalanilib, qiymatini korxona foydasiga o'tkazadi"
+    ],
+    correct: 2
+  },
+  {
+    question: "2. Quyidagi obyektlardan qaysi biri noishlab chiqarish asosiy fondlariga kiradi?",
+    options: [
+      "Korxona xodimlariga xizmat qiladigan bolalar bog'chasi binosi",
+      "Korxona mahsulotlarini tayyorlashda ishlatiladigan ishlab chiqarish binosi",
+      "Korxona xomashyosini tashishga mo'ljallangan yuk transporti vositasi",
+      "Korxona uskunalarini energiya bilan ta'minlaydigan uzatish qurilmasi"
+    ],
+    correct: 0
+  },
+  {
+    question: "3. Asosiy fondlarning aktiv qismini oshirishga qaysi tadbir bevosita xizmat qiladi?",
+    options: [
+      "Ma'muriy binolar uchun qo'shimcha xonalar ajratish",
+      "Xodimlar turar joylarining umumiy maydonini kengaytirish",
+      "Korxona hududidagi dam olish joylarini ko'paytirish",
+      "Ishlab chiqarish uchun yangi dastgohlar xarid qilish"
+    ],
+    correct: 3
+  },
+  {
+    question: "4. Asosiy fondlarning turlar bo'yicha tuzilmasi qanday aniqlanadi?",
+    options: [
+      "Har bir fond guruhining umumiy xodimlar soniga nisbati orqali",
+      "Har bir fond guruhining umumiy fondlar qiymatidagi ulushi orqali",
+      "Har bir fond guruhining yillik mahsulot hajmiga nisbati orqali",
+      "Har bir fond guruhining umumiy ishlab chiqarish xarajatidagi ulushi orqali"
+    ],
+    correct: 1
+  },
+  {
+    question: "5. Uskunani sotib olish, yetkazish va o'rnatish xarajatlari qaysi qiymatni shakllantiradi?",
+    options: [
+      "Uskunaning foydalanish davri oxiridagi tugatish qiymatini",
+      "Uskunaning eskirish chegirilgan holatdagi qoldiq qiymatini",
+      "Uskunaning foydalanishga topshirish paytidagi boshlang'ich qiymatini",
+      "Uskunaning joriy sharoitda qayta yaratilish tiklanish qiymatini"
+    ],
+    correct: 2
+  },
+  {
+    question: "6. Uskunaning tiklanish qiymati qanday iqtisodiy mazmunni ifodalaydi?",
+    options: [
+      "Uskunani hozirgi sharoitda qayta yaratish uchun zarur qiymatni",
+      "Uskunani dastlab sotib olish uchun sarflangan tarixiy qiymatni",
+      "Uskunaning mahsulot tannarxiga o'tkazilgan jami eskirish qiymatini",
+      "Uskunaning foydalanish yakunida sotilishidan olinadigan tugatish qiymatini"
+    ],
+    correct: 0
+  },
+  {
+    question: "12. Amortizatsiya jarayonining asosiy iqtisodiy mazmuni nimadan iborat?",
+    options: [
+      "Asosiy fondlar qiymatini korxona daromadiga to'liq qo'shish",
+      "Asosiy fondlar qiymatini mahsulot tannarxiga bosqichma-bosqich o'tkazish",
+      "Asosiy fondlar qiymatini aylanma mablag'lardan butunlay ajratish",
+      "Asosiy fondlar qiymatini sotish narxiga bir martada o'tkazish"
+    ],
+    correct: 1
+  },
+  {
+    question: "13. Uskuna qiymati 80 mln so'm, yillik amortizatsiya normasi 10%. Yillik amortizatsiya ajratmasi qancha?",
+    options: [
+      "6 mln so'm",
+      "7 mln so'm",
+      "8 mln so'm",
+      "9 mln so'm"
+    ],
+    correct: 2
+  },
+  {
+    question: "14. Bir maromli amortizatsiya usulining asosiy xususiyati qaysi?",
+    options: [
+      "Amortizatsiya summasi xizmat yillari davomida teng taqsimlanadi",
+      "Amortizatsiya summasi dastlabki xizmat yilida to'liq hisoblanadi",
+      "Amortizatsiya summasi ishlab chiqarilgan mahsulotga qarab belgilanadi",
+      "Amortizatsiya summasi faqat uskunani sotish vaqtida hisoblanadi"
+    ],
+    correct: 0
+  },
+  {
+    question: "15. Tezlashtirilgan amortizatsiya usuli korxonaga qanday imkoniyat yaratadi?",
+    options: [
+      "Uskunaning jismoniy eskirish jarayonini butunlay to'xtatish imkonini",
+      "Uskunaning xizmat muddatini qo'shimcha xarajatlarsiz uzaytirish imkonini",
+      "Uskunaning mahsulot ishlab chiqarishdagi ishtirokini kamaytirish imkonini",
+      "Uskuna qiymatining katta qismini dastlabki yillarda qoplash imkonini"
+    ],
+    correct: 3
+  },
+  {
+    question: "16. Ishlab chiqarish quvvati qaysi ko'rsatkichni ifodalaydi?",
+    options: [
+      "Korxonaning muayyan davrda haqiqatda sotgan mahsulotlari miqdorini",
+      "Korxonaning ilg'or sharoitlarda ishlab chiqarishi mumkin bo'lgan maksimal mahsulot miqdorini",
+      "Korxonaning muayyan davrda omborda saqlayotgan tayyor mahsulotlari miqdorini",
+      "Korxonaning mavjud shartnomalar asosida yetkazib berishi kerak bo'lgan mahsulot miqdorini"
+    ],
+    correct: 1
+  },
+  {
+    question: "17. Korxonaning ishlab chiqarish quvvati, avvalo, qaysi bo'g'inlar asosida aniqlanadi?",
+    options: [
+      "Asosiy sexlar, bosh uchastkalar va asosiy uskunalar quvvati asosida",
+      "Savdo bo'limlari, xizmat guruhlari va tayyor mahsulot omborlari asosida",
+      "Moliya bo'limlari, hisob guruhlari va mavjud pul mablag'lari asosida",
+      "Kadrlar bo'limlari, boshqaruv guruhlari va ma'muriy binolar asosida"
+    ],
+    correct: 0
+  },
+  {
+    question: "18. Sexda 5 ta uskuna mavjud. Har birining yillik ish vaqti 2 000 soat, mahsulot birligiga vaqt sarfi 2 soat. Sexning yillik quvvati qancha?",
+    options: [
+      "4 000 dona mahsulot",
+      "6 000 dona mahsulot",
+      "5 000 dona mahsulot",
+      "7 000 dona mahsulot"
+    ],
+    correct: 2
+  },
+  {
+    question: "19. Uskunalar soni va ish vaqti o'zgarmasa, mahsulot birligiga sarflanadigan vaqtning kamayishi qanday natija beradi?",
+    options: [
+      "Ishlab chiqarish quvvatining kamayishiga olib keladi",
+      "Ishlab chiqarish quvvatining oshishiga olib keladi",
+      "Ishlab chiqarish quvvatining o'zgarmasligiga olib keladi",
+      "Ishlab chiqarish quvvatining tugatilishiga olib keladi"
+    ],
+    correct: 1
+  },
+  {
+    question: "20. Ishlab chiqarish quvvati va uskunalarning yuklanishi o'rtasidagi farq qaysi javobda to'g'ri ko'rsatilgan?",
+    options: [
+      "Quvvat haqiqiy sotuvni, yuklanish esa mahsulot narxini ifodalaydi",
+      "Quvvat ombordagi zaxirani, yuklanish esa xomashyo qiymatini ifodalaydi",
+      "Quvvat korxona foydasini, yuklanish esa amortizatsiya summasini ifodalaydi",
+      "Quvvat maksimal imkoniyatni, yuklanish esa undan foydalanish darajasini ifodalaydi"
+    ],
+    correct: 3
+  }
+];
+
+// ═══════════════════════════════════════════════════════════════
+// Вспомогательные функции
 // ═══════════════════════════════════════════════════════════════
 const sessions = new Map();
-const TIME_LIMIT_MS = 10 * 60 * 1000; // 10 daqiqa
+const nameWaiting = new Map();
+const TIME_LIMIT_MS = 10 * 60 * 1000; // 10 минут
 
 function shuffleArray(arr) {
   const shuffled = [...arr];
@@ -252,27 +260,23 @@ function shuffleArray(arr) {
   return shuffled;
 }
 
-function prepareQuestions() {
-  const shuffledQuestions = shuffleArray(ALL_QUESTIONS);
-  return shuffledQuestions.map((q) => {
+function prepareQuestions(questionBank) {
+  const shuffled = shuffleArray(questionBank);
+  return shuffled.map((q) => {
     const correctAnswer = q.options[q.correct];
     const shuffledOptions = shuffleArray(q.options);
-    const newCorrectIndex = shuffledOptions.indexOf(correctAnswer);
     return {
       question: q.question,
       options: shuffledOptions,
-      correct: newCorrectIndex,
+      correct: shuffledOptions.indexOf(correctAnswer),
     };
   });
 }
 
 function getOptionLetter(index) {
-  return String.fromCharCode(65 + index); // A, B, C, D
+  return String.fromCharCode(65 + index);
 }
 
-// ═══════════════════════════════════════════════════════════════
-// Savolni yuborish
-// ═══════════════════════════════════════════════════════════════
 function sendQuestion(chatId) {
   const session = sessions.get(chatId);
   if (!session) return;
@@ -293,39 +297,33 @@ function sendQuestion(chatId) {
   const q = session.questions[qIndex];
   const remaining = Math.ceil((TIME_LIMIT_MS - elapsed) / 60000);
 
-  let text = `📝 *Savol ${qIndex + 1}/20*  ⏱ _${remaining} daq. qoldi_\n\n`;
+  let text = `📝 *Savol ${qIndex + 1}/${session.questions.length}* ⏱ _${remaining} daq. qoldi_\n\n`;
+  text += `📚 *Fan:* ${session.subjectName}\n\n`;
   text += `❓ ${q.question}\n\n`;
 
-  const keyboard = q.options.map((opt, i) => {
-    return [
-      {
-        text: `${getOptionLetter(i)}) ${opt}`,
-        callback_data: `ans_${qIndex}_${i}`,
-      },
-    ];
-  });
+  const keyboard = q.options.map((opt, i) => [
+    {
+      text: `${getOptionLetter(i)}) ${opt}`,
+      callback_data: `ans_${qIndex}_${i}`,
+    },
+  ]);
 
   bot.sendMessage(chatId, text, {
     parse_mode: 'Markdown',
     protect_content: true,
-    reply_markup: {
-      inline_keyboard: keyboard,
-    },
+    reply_markup: { inline_keyboard: keyboard },
   });
 }
 
 // ═══════════════════════════════════════════════════════════════
-// Testni tugatish
+// Завершение теста и запись результатов в отдельные папки
 // ═══════════════════════════════════════════════════════════════
 function finishTest(chatId, timeOut) {
   const session = sessions.get(chatId);
   if (!session || session.finished) return;
 
   session.finished = true;
-
-  if (session.timer) {
-    clearTimeout(session.timer);
-  }
+  if (session.timer) clearTimeout(session.timer);
 
   const total = session.questions.length;
   const correct = session.correctAnswers;
@@ -343,11 +341,11 @@ function finishTest(chatId, timeOut) {
   else if (percentage >= 56) grade = "Qoniqarli (3)";
   else grade = "Qoniqarsiz (2)";
 
-  // Foydalanuvchiga natijani yuborish
+  // Отправка результата пользователю
   const userResult = `
 ${timeOut ? '⏰ *Vaqt tugadi!*\n\n' : '✅ *Test yakunlandi!*\n\n'}📊 *Sizning natijangiz:*
 
-📚 Fan: Infratuzilma iqtisodiyoti
+📚 Fan: *${session.subjectName}*
 📝 Jami savollar: ${total}
 ✅ To'g'ri javoblar: ${correct}
 ❌ Noto'g'ri javoblar: ${wrong}
@@ -357,98 +355,137 @@ ${timeOut ? '⏰ *Vaqt tugadi!*\n\n' : '✅ *Test yakunlandi!*\n\n'}📊 *Siznin
 ⏱ Sarflangan vaqt: ${minutes} daq. ${seconds} son.
   `;
 
-  bot.sendMessage(chatId, userResult, {
-    parse_mode: 'Markdown',
-    protect_content: true,
-  });
+  bot.sendMessage(chatId, userResult, { parse_mode: 'Markdown', protect_content: true });
 
-  // ═══════════════════════════════════════════════
-  // Adminga natijani yuborish
-  // ═══════════════════════════════════════════════
+  // Уведомление администратору
   const user = session.user;
   const adminReport = `
 📋 *YANGI TEST NATIJASI*
+📚 *Fan:* ${session.subjectName}
 
 👤 *Talaba:*
-├ Ism: ${user.first_name || '—'} ${user.last_name || ''}
+├ Ism-familiya: ${session.studentName}
+├ Guruh: ${session.studentGroup}
 ├ Username: ${user.username ? '@' + user.username : '—'}
-├ User ID: \`${user.id}\`
-└ Til: ${user.language_code || '—'}
+└ User ID: \`${user.id}\`
 
-📚 *Fan:* Infratuzilma iqtisodiyoti
 📅 *Sana:* ${endTime.toLocaleString('uz-UZ', { timeZone: 'Asia/Tashkent' })}
 
 📊 *Natija:*
-├ ✅ To'g'ri: ${correct} / ${total}
+├ ✅ To'g'ri: ${correct} / ${total} (${percentage}%)
 └ 🎓 Baho: ${grade}
 ${timeOut ? '\n⚠️ Vaqt tugaganligi sababli test avtomatik yakunlandi.' : ''}
 `;
 
-  // Adminga faqat to'g'ri javob va baho yuboriladi
-  bot.sendMessage(ADMIN_ID, adminReport, {
-    parse_mode: 'Markdown',
-  }).catch((err) => {
+  bot.sendMessage(ADMIN_ID, adminReport, { parse_mode: 'Markdown' }).catch((err) => {
     console.error('❌ Adminga xabar yuborishda xatolik:', err.message);
+  });
+
+  // Запись результатов в нужную папку
+  let folderName = session.isSohaStudent ? 'soha_iqtisodiyoti' : 'infratuzilma_iqtisodiyoti';
+  const targetFolder = path.join(__dirname, 'natijalar', folderName);
+
+  if (!fs.existsSync(targetFolder)) {
+    fs.mkdirSync(targetFolder, { recursive: true });
+  }
+
+  const logFile = path.join(targetFolder, 'natijalar.txt');
+  const logLine = `[${endTime.toLocaleString('uz-UZ')}] | Guruh: ${session.studentGroup} | Talaba: ${session.studentName} | Natija: ${correct}/${total} (${percentage}%) | Baho: ${grade}\n`;
+
+  fs.appendFile(logFile, logLine, (err) => {
+    if (err) console.error('❌ Natijani faylga yozishda xatolik:', err.message);
   });
 
   sessions.delete(chatId);
 }
 
 // ═══════════════════════════════════════════════════════════════
-// /start - Botni boshlash
+// Обработчики Telegram
 // ═══════════════════════════════════════════════════════════════
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   const name = msg.from.first_name || "Do'stim";
 
   if (sessions.has(chatId)) {
-    bot.sendMessage(chatId, '⚠️ Sizda hali test davom etmoqda! Avval uni yakunlang.', {
+    bot.sendMessage(chatId, '⚠️ Sizda test davom etmoqda! Avval uni yakunlang.', { protect_content: true });
+    return;
+  }
+
+  nameWaiting.set(chatId, { user: msg.from });
+
+  bot.sendMessage(
+    chatId,
+    `🎓 *Assalomu alaykum, ${name}!*\n\n✍️ *Iltimos, ism va familiyangizni to'liq kiriting:*\n\n_Masalan: Abdullayev Sardor_`,
+    { parse_mode: 'Markdown', protect_content: true }
+  );
+});
+
+bot.on('message', (msg) => {
+  if (!msg.text || msg.text.startsWith('/')) return;
+  const chatId = msg.chat.id;
+
+  if (sessions.has(chatId)) {
+    bot.sendMessage(chatId, '📝 Test davom etmoqda! Iltimos, savollarga javob bering.', { protect_content: true });
+    return;
+  }
+
+  if (nameWaiting.has(chatId)) {
+    const fullName = msg.text.trim();
+
+    if (fullName.length < 3) {
+      bot.sendMessage(chatId, "⚠️ Iltimos, ism va familiyangizni to'liq kiriting.", { protect_content: true });
+      return;
+    }
+
+    const sohaCheck = findSohaStudent(fullName);
+    nameWaiting.delete(chatId);
+
+    let subjectName = "Infratuzilma iqtisodiyoti";
+    let questionBank = INFRATUZILMA_QUESTIONS;
+    let isSohaStudent = false;
+    let studentGroup = "Umumiy foydalanuvchi";
+    let studentName = fullName;
+
+    if (sohaCheck.found) {
+      subjectName = "Soha iqtisodiyoti va menejmenti";
+      questionBank = SOHA_QUESTIONS;
+      isSohaStudent = true;
+      studentGroup = sohaCheck.group;
+      studentName = sohaCheck.name;
+    }
+
+    nameWaiting.set(chatId, {
+      user: msg.from,
+      studentName: studentName,
+      studentGroup: studentGroup,
+      subjectName: subjectName,
+      questionBank: questionBank,
+      isSohaStudent: isSohaStudent,
+    });
+
+    const welcomeMsg = `
+✅ *Xush kelibsiz, ${studentName}!*
+📋 *Guruh:* ${studentGroup}
+📚 *Sizga ajratilgan fan:* ${subjectName}
+📝 *Savollar soni:* ${questionBank.length} ta
+⏱ *Vaqt:* 10 daqiqa
+
+Tayyor bo'lsangiz, tugmani bosing 👇
+    `;
+
+    bot.sendMessage(chatId, welcomeMsg, {
+      parse_mode: 'Markdown',
       protect_content: true,
+      reply_markup: {
+        inline_keyboard: [[{ text: '🚀 Testni boshlash', callback_data: 'start_test' }]],
+      },
     });
     return;
   }
 
-  const welcome = `
-🎓 *Assalomu alaykum, ${name}!*
-
-📚 *Fan:* Infratuzilma iqtisodiyoti
-📝 *Savollar soni:* 20 ta
-⏱ *Vaqt:* 10 daqiqa
-🔀 *Savollar va javoblar aralashtirilgan*
-
-📌 *Qoidalar:*
-• Har bir savolga bitta to'g'ri javob bor
-• Javob tanlagandan keyin ortga qaytib bo'lmaydi
-• Vaqt tugasa test avtomatik yakunlanadi
-• Natija o'qituvchiga yuboriladi
-• Ishlagan savollaringiz to'g'ri yoki noto'g'riligi sizga sir qoladi
-
-Tayyor bo'lsangiz quyidagi tugmani bosing 👇
-  `;
-
-  bot.sendMessage(chatId, welcome, {
-    parse_mode: 'Markdown',
-    protect_content: true,
-    reply_markup: {
-      inline_keyboard: [
-        [{ text: '🚀 Testni boshlash', callback_data: 'start_test' }],
-      ],
-    },
-  });
+  bot.sendMessage(chatId, "👋 Testni boshlash uchun /start buyrug'ini yuboring.");
 });
 
-// ═══════════════════════════════════════════════════════════════
-// /myid - ID ni ko'rish
-// ═══════════════════════════════════════════════════════════════
-bot.onText(/\/myid/, (msg) => {
-  bot.sendMessage(msg.chat.id, `🆔 Sizning Telegram ID: \`${msg.from.id}\``, {
-    parse_mode: 'Markdown',
-  });
-});
-
-// ═══════════════════════════════════════════════════════════════
-// Callback query handler
-// ═══════════════════════════════════════════════════════════════
 bot.on('callback_query', (query) => {
   const chatId = query.message.chat.id;
   const data = query.data;
@@ -459,10 +496,21 @@ bot.on('callback_query', (query) => {
       return;
     }
 
-    const questions = prepareQuestions();
+    const userData = nameWaiting.get(chatId);
+    if (!userData) {
+      bot.sendMessage(chatId, "⚠️ Seans eskirgan. Qaytadan /start bosing.");
+      return;
+    }
+
+    nameWaiting.delete(chatId);
+    const questions = prepareQuestions(userData.questionBank);
 
     const session = {
       user: query.from,
+      studentName: userData.studentName,
+      studentGroup: userData.studentGroup,
+      subjectName: userData.subjectName,
+      isSohaStudent: userData.isSohaStudent,
       questions: questions,
       currentQuestion: 0,
       answers: {},
@@ -482,11 +530,7 @@ bot.on('callback_query', (query) => {
     sessions.set(chatId, session);
 
     bot.answerCallbackQuery(query.id, { text: '✅ Test boshlandi! Omad!' });
-
-    bot.sendMessage(chatId, '⏱ *Test boshlandi!* Sizda 10 daqiqa vaqt bor.\n\nOmad tilayman! 🍀', {
-      parse_mode: 'Markdown',
-      protect_content: true,
-    });
+    bot.sendMessage(chatId, '⏱ *Test boshlandi!* Omadingizni bersin! 🍀', { parse_mode: 'Markdown' });
 
     sendQuestion(chatId);
     return;
@@ -495,7 +539,7 @@ bot.on('callback_query', (query) => {
   if (data.startsWith('ans_')) {
     const session = sessions.get(chatId);
     if (!session || session.finished) {
-      bot.answerCallbackQuery(query.id, { text: '⚠️ Test topilmadi yoki yakunlangan!' });
+      bot.answerCallbackQuery(query.id, { text: '⚠️ Test yakunlangan!' });
       return;
     }
 
@@ -504,66 +548,19 @@ bot.on('callback_query', (query) => {
     const aIndex = parseInt(parts[2]);
 
     if (session.answers[qIndex] !== undefined) {
-      bot.answerCallbackQuery(query.id, { text: '⚠️ Bu savolga allaqachon javob bergansiz!' });
-      return;
-    }
-
-    const elapsed = Date.now() - session.startTime;
-    if (elapsed >= TIME_LIMIT_MS) {
-      bot.answerCallbackQuery(query.id, { text: '⏰ Vaqt tugadi!' });
-      finishTest(chatId, true);
+      bot.answerCallbackQuery(query.id, { text: '⚠️ Bu savolga javob bergansiz!' });
       return;
     }
 
     session.answers[qIndex] = aIndex;
     session.answeredCount++;
 
-    const q = session.questions[qIndex];
-    if (aIndex === q.correct) {
+    if (aIndex === session.questions[qIndex].correct) {
       session.correctAnswers++;
     }
 
-    // Talabaga javobi to'g'ri yoki noto'g'riligi aytilmaydi
-    bot.answerCallbackQuery(query.id, { text: '✅ Javob qayd etildi!' });
-
+    bot.answerCallbackQuery(query.id, { text: '✅ Javob qabul qilindi!' });
     session.currentQuestion = qIndex + 1;
     sendQuestion(chatId);
   }
 });
-
-// ═══════════════════════════════════════════════════════════════
-// Oddiy xabarlarga javob
-// ═══════════════════════════════════════════════════════════════
-bot.on('message', (msg) => {
-  if (!msg.text || msg.text.startsWith('/')) return;
-
-  const chatId = msg.chat.id;
-
-  if (sessions.has(chatId)) {
-    bot.sendMessage(chatId, '📝 Test davom etmoqda! Iltimos, savolga javob bering.', {
-      protect_content: true,
-    });
-    return;
-  }
-
-  bot.sendMessage(chatId, '👋 Testni boshlash uchun /start buyrug\'ini yuboring.', {
-    protect_content: true,
-  });
-});
-
-// ═══════════════════════════════════════════════════════════════
-// Xatoliklarni ushlash
-// ═══════════════════════════════════════════════════════════════
-bot.on('polling_error', (error) => {
-  if (error.code === 'ETELEGRAM' && error.response && error.response.statusCode === 409) {
-    console.error('❌ Boshqa bot instansiyasi ishlayapti! Avval uni to\'xtating.');
-    process.exit(1);
-  }
-  console.error('❌ Polling xatosi:', error.code, error.message);
-});
-
-bot.on('error', (error) => {
-  console.error('❌ Bot xatosi:', error.message);
-});
-
-console.log('✅ Bot tayyor! Telegramda /start yuboring.');
